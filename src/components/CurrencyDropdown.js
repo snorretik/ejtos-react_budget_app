@@ -1,13 +1,20 @@
-// import React, { useState } from 'react';
-// import { AppContext } from '../context/AppContext';
+import React, { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 
 const CurrencyDropdown = () => {
-    // const { currency } = useContext(AppContext);
-
-    //const [currency, setCurrency] = useState('');
+    const { dispatch } = useContext(AppContext);
 
     const changeCurrency = (theValue) => {
-        console.log(theValue);  
+        console.log(theValue);
+
+        const currencyObject = {
+            currency: String(theValue),
+        }
+        
+        dispatch({
+            type: 'CHG_CURRENCY',
+            payload: currencyObject,
+        });
     }
 
     return (
@@ -30,10 +37,10 @@ const CurrencyDropdown = () => {
                             outline: "none", 
                             width: "92px"}}
                     onChange={(event) => changeCurrency(event.target.value)}>
-                <option value="$" style={{color: "black", width: "150px"}}>$ Dollar</option>
-                <option value="£" style={{color: "black", width: "150px"}}>£ Pound</option>
-                <option value="€" style={{color: "black", width: "150px"}}>€ Euro</option>
-                <option value="₹" style={{color: "black", width: "150px"}}>₹ Ruppee</option>
+                <option value="$" style={{color: "black"}}>$ Dollar</option>
+                <option selected='selected' value="£" style={{color: "black"}}>£ Pound</option>
+                <option value="€" style={{color: "black"}}>€ Euro</option>
+                <option value="₹" style={{color: "black"}}>₹ Ruppee</option>
             </select>
             )
             </label>
